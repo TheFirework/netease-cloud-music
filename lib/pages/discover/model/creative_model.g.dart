@@ -33,7 +33,7 @@ Map<String, dynamic> _$CreativeModelToJson(CreativeModel instance) =>
 
 CreativeExtInfoVO _$CreativeExtInfoVOFromJson(Map<String, dynamic> json) =>
     CreativeExtInfoVO(
-      json['playCount'] as int,
+      json['playCount'] as int?,
     );
 
 Map<String, dynamic> _$CreativeExtInfoVOToJson(CreativeExtInfoVO instance) =>

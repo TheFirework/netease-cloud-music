@@ -27,12 +27,11 @@ class _SplashPageState extends State<SplashPage> {
       //     Provider.of<PlaySongsModel>(context, listen: false);
       // 判断是否有保存的歌曲列表
       if (userProvider.user != null) {
-        // LoginApi.refreshLogin().then((value) {
-        //   if (value.data != -1) {
-        //     NavigatorUtil.goHomePage(context);
-        //   }
-        // });
-        NavigatorUtil.goHomePage(context);
+        LoginApi.refreshLogin().then((value) {
+          if (value.data != -1) {
+            NavigatorUtil.goHomePage(context);
+          }
+        });
         // Provider.of<PlayListModel>(context, listen: false).user = userModel.user!;
       } else {
         NavigatorUtil.goLoginPage(context);

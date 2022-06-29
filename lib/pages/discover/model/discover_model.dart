@@ -18,7 +18,10 @@ class DiscoverModel extends Object {
   @JsonKey(name: 'pageConfig')
   PageConfig pageConfig;
 
-  DiscoverModel(this.cursor,this.blocks,this.pageConfig,);
+  @JsonKey(name: 'hasMore')
+  bool? hasMore;
+
+  DiscoverModel(this.cursor,this.blocks,this.pageConfig,this.hasMore);
 
   factory DiscoverModel.fromJson(Map<String, dynamic> srcJson) => _$DiscoverModelFromJson(srcJson);
 

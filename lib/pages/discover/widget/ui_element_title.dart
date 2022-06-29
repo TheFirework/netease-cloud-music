@@ -7,10 +7,10 @@ import 'ui_element_button.dart';
 
 class UiElementTitle extends StatelessWidget {
   final UiElementModel elementModel;
-
+  final bool showButton;
   final VoidCallback? onPressed;
 
-  const UiElementTitle({Key? key, required this.elementModel, this.onPressed})
+  const UiElementTitle({Key? key, required this.elementModel, this.onPressed, this.showButton = true})
       : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class UiElementTitle extends StatelessWidget {
               ),
             ),
           ),
-          if (elementModel.button != null)
+          if (elementModel.button != null && showButton)
             Expanded(
               flex: 0,
               child: UiElementButton(

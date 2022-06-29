@@ -23,9 +23,9 @@ class PlayCountWidget extends StatelessWidget {
         ),
         Text(
           NumberUtils.amountConversion(playCount!),
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
-            fontSize: 11,
+            fontSize: ScreenUtil().setSp(20),
             fontWeight: FontWeight.w500,
           ),
         ),

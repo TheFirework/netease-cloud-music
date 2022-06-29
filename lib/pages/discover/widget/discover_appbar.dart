@@ -51,7 +51,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
                         Text(
                           "点击搜索",
                           style: TextStyle(
-                            fontSize: ScreenUtil().setWidth(22),
+                            fontSize: ScreenUtil().setSp(22),
                             color: Colors.grey,
                           ),
                         ),

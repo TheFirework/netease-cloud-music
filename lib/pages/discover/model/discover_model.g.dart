@@ -13,6 +13,7 @@ DiscoverModel _$DiscoverModelFromJson(Map<String, dynamic> json) =>
           .map((e) => Blocks.fromJson(e as Map<String, dynamic>))
           .toList(),
       PageConfig.fromJson(json['pageConfig'] as Map<String, dynamic>),
+      json['hasMore'] as bool?,
     );
 
 Map<String, dynamic> _$DiscoverModelToJson(DiscoverModel instance) =>
@@ -20,6 +21,7 @@ Map<String, dynamic> _$DiscoverModelToJson(DiscoverModel instance) =>
       'cursor': instance.cursor,
       'blocks': instance.blocks,
       'pageConfig': instance.pageConfig,
+      'hasMore': instance.hasMore,
     };
 
 Blocks _$BlocksFromJson(Map<String, dynamic> json) => Blocks(

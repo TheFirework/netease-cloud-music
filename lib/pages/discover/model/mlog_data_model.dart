@@ -14,13 +14,13 @@ class MlogDataModel extends Object {
   int mlogBaseDataType;
 
   @JsonKey(name: 'resource')
-  MlogResource resource;
+  MlogResource? resource;
 
   @JsonKey(name: 'reason')
-  String reason;
+  String? reason;
 
   @JsonKey(name: 'sameCity')
-  bool sameCity;
+  bool? sameCity;
 
   MlogDataModel(
     this.id,
@@ -46,7 +46,7 @@ class MlogResource extends Object {
   MlogExtVO mlogExtVO;
 
   @JsonKey(name: 'userProfile')
-  MlogUserProfile userProfile;
+  MlogUserProfile? userProfile;
 
   @JsonKey(name: 'shareUrl')
   String shareUrl;
@@ -73,13 +73,13 @@ class MlogBaseData extends Object {
   int type;
 
   @JsonKey(name: 'originalTitle')
-  String originalTitle;
+  String? originalTitle;
 
   @JsonKey(name: 'text')
   String text;
 
   @JsonKey(name: 'desc')
-  String desc;
+  String? desc;
 
   @JsonKey(name: 'pubTime')
   int pubTime;

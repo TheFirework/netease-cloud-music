@@ -39,7 +39,7 @@ class CreativeModel extends Object {
 @JsonSerializable()
 class CreativeExtInfoVO extends Object {
   @JsonKey(name: 'playCount')
-  int playCount;
+  int? playCount;
 
   CreativeExtInfoVO(
     this.playCount,
@@ -47,6 +47,7 @@ class CreativeExtInfoVO extends Object {
 
   factory CreativeExtInfoVO.fromJson(Map<String, dynamic> srcJson) =>
       _$CreativeExtInfoVOFromJson(srcJson);
+
 
   Map<String, dynamic> toJson() => _$CreativeExtInfoVOToJson(this);
 }

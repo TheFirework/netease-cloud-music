@@ -60,7 +60,7 @@ class DiscoverSlideSonglistAlign extends StatelessWidget {
     SongModel? song = resources.resourceExtInfo?.song;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: (){
+      onTap: () {
         print('parent');
       },
       child: Container(
@@ -140,13 +140,15 @@ class DiscoverSlideSonglistAlign extends StatelessWidget {
       text: TextSpan(
           text: uiElement.mainTitle?.title,
           style: TextStyle(
-              fontSize: ScreenUtil().setWidth(26), color: Colors.black87),
+            fontSize: ScreenUtil().setSp(26),
+            color: Colors.black87,
+          ),
           children: [
             WidgetSpan(child: Gap(width: 8)),
             TextSpan(
               text: '-',
               style: TextStyle(
-                fontSize: ScreenUtil().setWidth(18),
+                fontSize: ScreenUtil().setSp(18),
                 color: Colors.grey.shade500,
               ),
             ),
@@ -154,7 +156,7 @@ class DiscoverSlideSonglistAlign extends StatelessWidget {
             TextSpan(
                 text: song.ar.map((e) => e.name!).join("/"),
                 style: TextStyle(
-                  fontSize: ScreenUtil().setWidth(18),
+                  fontSize: ScreenUtil().setSp(18),
                   color: Colors.grey.shade500,
                 )),
           ]),

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keframe/keframe.dart';
 import 'package:netease_cloud_music/api/discover_api.dart';
+import 'package:netease_cloud_music/application.dart';
 import 'package:netease_cloud_music/core/values/constants.dart';
 import 'package:netease_cloud_music/models/banner_model.dart';
 import 'package:netease_cloud_music/pages/discover/model/ball_model.dart';
@@ -13,6 +17,7 @@ import 'model/discover_model.dart';
 import 'widget/discover_appbar.dart';
 import 'widget/discover_ball.dart';
 import 'widget/discover_banner.dart';
+import 'widget/discover_slide_playable_mlog.dart';
 import 'widget/discover_slide_playlist.dart';
 import 'widget/discover_slide_songlist_align.dart';
 import 'widget/hot_topic.dart';
@@ -32,22 +37,36 @@ class _DiscoverPageState extends State<DiscoverPage>
   @override
   void initState() {
     super.initState();
-    getHomePageWidgetList(refresh: true);
+    _onRefresh();
   }
 
-  Future<void> getHomePageWidgetList({bool refresh = false}) async {
-    DiscoverApi.getHomePage(refresh: refresh).then((value) {
-      if (value != null) {
-        setState(() {
-          blocks = value.blocks;
-        });
-      }
-      refreshController.loadComplete();
-    });
+  Future<DiscoverModel?> getHomePageWidgetList({bool refresh = false}) async {
+    var cacheData = Application.sp?.getString(HOME_PAGE_DATA);
+    DiscoverModel? discoverModel;
+    if (cacheData != null) {
+      discoverModel = DiscoverModel.fromJson(json.decode(cacheData));
+    }
+    final result = await DiscoverApi.getHomePage(
+      refresh: refresh,
+      cursor: discoverModel?.cursor,
+    );
+    return result;
   }
 
   Future<void> _onRefresh() async {
-    await getHomePageWidgetList();
+    print('刷新');
+    DiscoverModel? discoverModel = await getHomePageWidgetList(refresh: true);
+    if (discoverModel != null) {
+      final ballList = await DiscoverApi.getHomePageBall();
+      discoverModel.blocks.insert(
+        1,
+        Blocks(HomePageShowType.HOMEPAGE_BALL, HomePageShowType.HOMEPAGE_BALL,
+            0, ballList, false, 0, null, null),
+      );
+      setState(() {
+        blocks = discoverModel.blocks;
+      });
+    }
     refreshController.refreshCompleted();
   }
 
@@ -75,6 +94,9 @@ class _DiscoverPageState extends State<DiscoverPage>
       controller: refreshController,
       onRefresh: _onRefresh,
       child: ListView.separated(
+        shrinkWrap: true,
+        physics: const ScrollPhysics(),
+        padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
         itemBuilder: (context, index) {
           return FrameSeparateWidget(
             index: index,
@@ -127,9 +149,7 @@ class _DiscoverPageState extends State<DiscoverPage>
           creatives: block.creatives!,
         );
       case HomePageShowType.HOMEPAGE_SLIDE_PLAYABLE_MLOG:
-        return Container(
-          child: Text('精选音乐视频'),
-        );
+        return DiscoverSlidePlayableMlog(blocks: block);
       case HomePageShowType.HOMEPAGE_SLIDE_LISTEN_LIVE:
         return Container(
           child: Text('直播'),

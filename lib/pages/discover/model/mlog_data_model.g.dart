@@ -11,9 +11,11 @@ MlogDataModel _$MlogDataModelFromJson(Map<String, dynamic> json) =>
       json['id'] as String,
       json['type'] as int,
       json['mlogBaseDataType'] as int,
-      MlogResource.fromJson(json['resource'] as Map<String, dynamic>),
-      json['reason'] as String,
-      json['sameCity'] as bool,
+      json['resource'] == null
+          ? null
+          : MlogResource.fromJson(json['resource'] as Map<String, dynamic>),
+      json['reason'] as String?,
+      json['sameCity'] as bool?,
     );
 
 Map<String, dynamic> _$MlogDataModelToJson(MlogDataModel instance) =>
@@ -29,7 +31,10 @@ Map<String, dynamic> _$MlogDataModelToJson(MlogDataModel instance) =>
 MlogResource _$MlogResourceFromJson(Map<String, dynamic> json) => MlogResource(
       MlogBaseData.fromJson(json['mlogBaseData'] as Map<String, dynamic>),
       MlogExtVO.fromJson(json['mlogExtVO'] as Map<String, dynamic>),
-      MlogUserProfile.fromJson(json['userProfile'] as Map<String, dynamic>),
+      json['userProfile'] == null
+          ? null
+          : MlogUserProfile.fromJson(
+              json['userProfile'] as Map<String, dynamic>),
       json['shareUrl'] as String,
     );
 
@@ -44,9 +49,9 @@ Map<String, dynamic> _$MlogResourceToJson(MlogResource instance) =>
 MlogBaseData _$MlogBaseDataFromJson(Map<String, dynamic> json) => MlogBaseData(
       json['id'] as String,
       json['type'] as int,
-      json['originalTitle'] as String,
+      json['originalTitle'] as String?,
       json['text'] as String,
-      json['desc'] as String,
+      json['desc'] as String?,
       json['pubTime'] as int,
       json['coverUrl'] as String,
       json['duration'] as int,

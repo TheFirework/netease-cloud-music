@@ -28,7 +28,7 @@ class UiElementButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (elementButton?.actionType == "client_customized")
+          if (elementButton?.actionType == "client_customized" && elementButton?.action == "play_all_song")
             Image.asset(
               "assets/images/icon_event_video_play.png",
               color: Colors.black87,
